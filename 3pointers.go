@@ -1,17 +1,32 @@
 package main
+// TODO https://tour.golang.org/moretypes/6
+import (
+	"fmt"
+)
 
-import "fmt"
+func basicPointer() {
+	i := 42
+	p := &i
+	*p = 32
+	fmt.Println(i)
+}
+
+type Vertex struct {
+	x int
+	y int
+}
+
+func structTest() {
+	v := Vertex{1,2}
+	fmt.Println(v)
+	v1 := Vertex{}
+	fmt.Println(v1)
+	p2 := &Vertex{y:4}
+	p2.x = 3e4 // same as (*p).x = 3
+	fmt.Println(p2)
+}
 
 func main() {
-	i, j := 42, 2701
-
-	//p := &i         // point to i
-	//fmt.Println(*p) // read i through the pointer
-	var p *int
-	*p = 21         // set i through the pointer
-	fmt.Println(i)  // see the new value of i
-
-	p = &j         // point to j
-	*p = *p / 37   // divide j through the pointer
-	fmt.Println(j) // see the new value of j
+	basicPointer()
+	structTest()
 }

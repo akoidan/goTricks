@@ -1,8 +1,10 @@
 package main
 // TODO https://tour.golang.org/moretypes/16
+
 import (
 	"fmt"
 	"strings"
+	"golang.org/x/tour/pic"
 )
 
 func basicPointer() {
@@ -153,6 +155,33 @@ func multiDimensionSlice() {
 
 }
 
+func getPic(dx,dy int) (result [][]uint8){
+	result = make([][]uint8, dx)
+	for x := 0; x < dx; x++ {
+		result[x] = make([]uint8, dy)
+		for y :=0; y < dy; y++ {
+			if x > 0 && y > 0 && (y != x){
+				result[x][y] = uint8((y + x) / (y - x) * y * y / x)
+			} else {
+				result[x][y] = uint8(x^y)
+			}
+
+		}
+	}
+	return
+}
+
+func drawPic() {
+	pic.Show(getPic)
+}
+
+func sliceIterRange() {
+	slice := []int{2,4,8,16,32}
+	for i, v := range slice {
+		fmt.Printf("%v*2=%v\n", i+1,v)
+	}
+}
+
 func main() {
 	//basicPointer()
 	//structTest()
@@ -164,5 +193,7 @@ func main() {
 	//builtinMake();
 	//arrayAutoCount()
 	//builtinMake()
-	multiDimensionSlice()
+	//multiDimensionSlice()
+	//sliceIterRange()
+	drawPic()
 }

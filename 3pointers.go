@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"strings"
 	"golang.org/x/tour/pic"
+	"golang.org/x/tour/wc"
 )
 
 func basicPointer() {
@@ -17,6 +18,79 @@ func basicPointer() {
 type Vertex struct {
 	x int
 	y int
+}
+
+func testMap()  {
+	//var m map[string]Vertex
+	m := map[string]Vertex{
+		"A": Vertex{2, 3},
+		"B": {4, 6},
+	}
+	//m = make(map[string]Vertex, 10)
+	m["dancehub"] = Vertex{3 , 4}
+	delete(m, "A")
+	a, ok := m["D"]
+	fmt.Printf("Map %v?Value of a: %v, present %v", m, a, ok)
+
+}
+
+func wordCount(dd string) map[string]int {
+	d := strings.Fields(dd)
+	m := make(map[string]int, len(d))
+	for _, v := range d {
+		m[v] ++
+	}
+	return m
+}
+
+func acceptFuncAsArg(fn func(int, int) int, a int, b int) int {
+	return fn(a, b)
+}
+
+func funValueTest() {
+	fmt.Printf("2+3= %v\n", acceptFuncAsArg(sum, 2, 3))
+	diff := func (a int, b int) int {
+		return a-b
+	}
+	fmt.Printf("3-4= %v\n", acceptFuncAsArg(diff, 3, 4))
+}
+
+func closureFunc() func(x int) int{
+	sum := 0
+	inc := func(x int) int {
+		sum += x
+		return sum
+	}
+	return inc
+}
+
+func testClosureFunc () {
+	pos, neg := closureFunc(), closureFunc()
+	for i := 0; i < 5; i++ {
+		fmt.Println(pos(i), neg(-i*2))
+	}
+}
+
+func fibonacci() func() int {
+	a := 0
+	b := 1
+	return func() int {
+		c := a+b
+		a = b
+		b = c
+		return c
+	}
+}
+
+func fibonacciTest() {
+	getNextFibonacci := fibonacci()
+	for i:=0; i < 10; i++ {
+		fmt.Println(getNextFibonacci())
+	}
+}
+
+func wcTest() {
+	wc.Test(wordCount)
 }
 
 func structTest() {
@@ -182,6 +256,12 @@ func sliceIterRange() {
 	}
 }
 
+func sum(a int, b int) int {
+	return a+b
+}
+
+
+
 func main() {
 	//basicPointer()
 	//structTest()
@@ -195,5 +275,11 @@ func main() {
 	//builtinMake()
 	//multiDimensionSlice()
 	//sliceIterRange()
-	drawPic()
+	//drawPic()
+	//testMap()
+	//wcTest();
+	//funValueTest()
+	//testClosureFunc()
+	fibonacciTest()
 }
+

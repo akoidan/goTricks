@@ -80,7 +80,7 @@ func getNumber(arg int) int {
 
 func deferStatement(number int)  {
 	fmt.Println("Preparing deffer")
-	defer fmt.Printf("Deffer %v is called", getNumber(number))
+	defer fmt.Printf("Deffer %v is called\n", getNumber(number))
 	fmt.Println("Deffer is used")
 }
 
@@ -102,4 +102,5 @@ func main() {
 
 	//isSaturdaySoon()
 	stackDeffer()
+	fmt.Println("Main is finished")
 }

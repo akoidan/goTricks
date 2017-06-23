@@ -30,6 +30,6 @@ func main() {
 	var a , b  = add(2, 3)
 	//var i = 344333333333333333333333333333333333.3
 	fmt.Println(needInt(b))
-	fmt.Println(needFloat(b))
+	//fmt.Println(needFloat(b))
 	fmt.Println(a)
 }
